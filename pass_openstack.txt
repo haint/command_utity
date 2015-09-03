@@ -1,0 +1,29 @@
+RABBIT_PASS 	Password of user guest of RabbitMQ
+KEYSTONE_DBPASS 	Database password of Identity service
+DEMO_PASS 	Password of user demo
+ADMIN_PASS 	Password of user admin
+GLANCE_DBPASS 	Database password for Image Service
+GLANCE_PASS 	Password of Image Service user glance
+NOVA_DBPASS 	Database password for Compute service
+NOVA_PASS 	Password of Compute service user nova
+DASH_DBPASS 	Database password for the dashboard
+CINDER_DBPASS 	Database password for the Block Storage service
+CINDER_PASS 	Password of Block Storage service user cinder
+NEUTRON_DBPASS 	Database password for the Networking service
+NEUTRON_PASS 	Password of Networking service user neutron
+HEAT_DBPASS 	Database password for the Orchestration service
+HEAT_PASS 	Password of Orchestration service user heat
+CEILOMETER_DBPASS 	Database password for the Telemetry service
+CEILOMETER_PASS 	Password of Telemetry service user ceilometer
+TROVE_DBPASS 	Database password of Database service
+TROVE_PASS 	Password of Database Service user trove
+MYSQL_PASSS password mysql
+62b42822f4222addc7e5
+export OS_SERVICE_TOKEN=62b42822f4222addc7e5
+
+neutron subnet-create ext-net --name ext-subnet \
+  --allocation-pool start=172.27.4.200,end=172.27.4.250 \
+  --disable-dhcp --gateway 172.27.4.1 172.27.4.0/24
+  
+ nova boot --flavor m1.tiny --image cirros-0.3.3-x86_64 --nic net-id=b1f4839e-ed96-4f7f-bd93-10ec43ad874b \
+  --security-group default --key-name demo-key demo-instance1

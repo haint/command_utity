@@ -18,8 +18,13 @@ sudo ufw disable
 &> file redirects stdout and stderr to file
 
 /dev/null is the null device it takes any input you want and throws it away. It can be used to suppress any output. 
+
+xoa file running
+cat /dev/null > your_file
 --kiem tra do phan giai man hinh
  xwininfo -display 0:0 -root 
+ 
+ 
  
  Với các hiển thị cục bộ trên hệ thống Linux, ủy quyền thường phụ thuộc vào một cái gọi là MIT-MAGIC-COOKIE-1, mà thường được tái tạo mỗi lần khởi động lại trình chủ X. Một người dùng có thể trích xuất mẩu cookie ma thuật từ tập tin .Xauthority trong thư mục nhà của mình bằng cách sử dụng lệnh xauth extract và cung cấp nó cho một người dùng khác để kết hợp vào tập tin .Xauthority của người dùng này bằng cách sử dụng lệnh xauth merge. Một cách khác là một người dùng có thể cấp quyền cho những người dùng khác để truy cập hệ thống cục bộ bằng cách sử dụng lệnh xhost +local:. 
 
@@ -43,14 +48,22 @@ sudo ufw disable
 	
 ### WHEN apt-get install error clean apt-list
 
-sudo apt-get clean 
-cd /var/lib/apt 
+sudo apt-get clean
+cd /var/lib/apt
 sudo mv lists lists.old
-sudo rm /var/lib/apt/lists/* -vf
 sudo mkdir -p lists/partial
-sudo apt-get clean 
+sudo apt-get clean
 sudo apt-get update
 
+
+sudo apt-get clean
+cd /var/lib/apt
+sudo mkdir -p lists/partial
+sudo apt-get clean
+sudo apt-get update
+
+
+sudo rm /var/lib/apt/lists/* -vf
 
 guacamole/stable
  sudo add-apt-repository --remove ppa:guacamole/stable
@@ -77,6 +90,113 @@ sudo lshw -C network
 snat in ubuntu
 
 echo 1 > /proc/sys/net/ipv4/ip_forward
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -A FORWARD -i eth1 -j ACCEPT
+##CHECK XEM ENABLE IP_FORWARD trong linux
+sysctl net.ipv4.ip_forward
+##hoac 
+cat /proc/sys/net/ipv4/ip_forward
+NAT OUT
+iptables -t nat -A POSTROUTING -s 192.168.100/24 -d 0/0 -o eth0 -j MASQUERADE
 
+###NAT IN
+iptables -t nat -A PREROUTING -d 172.27.4.48 -i eth0 -p tcp -m tcp --dport 7788 -j DNAT --to-destination 192.168.100.37:22
+iptables -t nat -A PREROUTING -d 172.27.4.48 -i eth0 -p tcp -m tcp --dport 7789 -j DNAT --to-destination 192.168.100.37:8081
+
+
+REMOVE RULE
+
+###search all rule and line
+iptables -t nat --line-numbers -L 
+##remove rule in line
+iptables -t nat -D PREROUTING 6
+
+####find tat cac cac ket noi den server
+netstat -n -A inet
+
+
+###### route add default gw
+route add default gw 192.168.1.10
+
+
+#### LS
+ls -l show all attribute of file folder
+ls -lh show file, folder have size human readable
+ls -a show hidden file 
+ls -lt sort file  by time modified
+ls -lhS sort file by size 
+
+
+##add user trong rabbitmq 
+sudo rabbitmqctl add_user newadmin s0m3p4ssw0rd
+
+##set quyen rabbitmq
+sudo rabbitmqctl set_permissions newadmin ".*" ".*" ".*"
+
+## change password
+rabbitmqctl change_password guest RABBIT_PASS
+
+
+### create virtual ip  ubuntu 
+example add virtual ip to eth1 
+copy and add to /etc/network/interface
+auto eth1
+iface eth1 inet static
+address 192.168.184.2
+netmask 255.255.255.0
+gateway 192.168.184.1
+
+auto eth1:1
+iface eth1:1 inet static
+address 192.168.184.3
+netmask 255.255.255.0
+gateway 192.168.184.1
+
+
+###sau khi cau hinh xong can 
+
+echo 1 > /proc/sys/net/ipv4/ip_nonlocal_bind 
+
+check 
+sysctl net.ipv4.ip_nonlocal_bind
+##relaod sysctl varialble
+sysctl --system 
+
+
+
+
+##### config dns-nameserver ubuntu
+##buoc 1
+vim /etc/resolvconf/resolv.conf.d/head  
+
+### buoc 2 put your nameserver list in
+
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
+### buoc 3 then run 
+
+resolvconf -u
+
+
+
+##### diable auto update ubuntu
+vi /etc/apt/apt.conf.d/10periodic
+To enable automatic updates, we need to edit /etc/apt/apt.conf.d/10periodic file,
+
+$ sudo vi /etc/apt/apt.conf.d/10periodic
+
+and set the appropriate apt configuration options:
+
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+
+The above configuration updates the package list, downloads, and installs available upgrades every day. The local download archive is cleaned every week. If you want to disable automatic updates, just change the value 1 to 0(zero).
+
+## add service auto start after reboot
+update-rc.d <service> defaults
+
+
+lenh rsyn example
+rsync -avzur -e ssh /home/cloudats/.m2/repository(sources) rsync_mvn@172.27.4.101:/home/rsync_mvn/(dest)
+smb protocol in linux share file in lan

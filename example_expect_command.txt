@@ -1,0 +1,22 @@
+#!/usr/bin/expect -f
+spawn ssh aspen
+expect "password: "
+send "PASSWORD\r"
+expect "$ "
+send "ps -ef |grep apache\r"
+expect "$ "
+send "exit\r"
+
+
+#### example using rsync 
+
+#!/usr/bin/expect
+spawn rsync -avzur -e ssh /home/cloudats/.m2/repository rsync_mvn@172.27.4.101:/home/rsync_mvn/
+expect "password:"
+send "rsync_mvn\n"
+expect eof
+if [catch wait] {
+    puts "rsync failed"
+    exit 1
+}
+exit 0

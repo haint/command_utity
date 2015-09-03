@@ -1,0 +1,16 @@
+###reset-state instance
+nova reset-state instance_ID
+
+### neu server(install o state la error thi change sang active = lenh sau )
+
+nova reset-state --active instance_ID
+## stop instance
+nova stop instance_ID
+Dear Anh!
+Em kiểm tra định dạng của bên anh là 
+
+CP6x17{YEAR####}{MON##}{DAY##}{SEQ######}.bil
+cp6x17{YEAR####}{MON##}{DAY##}{SEQ######}.bil
+vậy nên bên em không thể get về và import ạ.
+Đề nghị bên anh đẩy lại đúng định dạng như đã thống nhất ạ
+Thanks & Best Regards!

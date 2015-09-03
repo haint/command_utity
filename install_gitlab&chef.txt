@@ -10,6 +10,7 @@ sudo gitlab-ctl reconfigure
 ###Remember change port 8082 gitlab
 postgresql['enable'] = true
 postgresql['port'] = 5433
+unicorn['port'] = 8083
 sudo gitlab-ctl reconfigure
 sudo gitlab-rake gitlab:setup
 
@@ -17,6 +18,21 @@ sudo gitlab-rake gitlab:setup
 login.........admin@local.host
 password......5iveL!fe
 pass default cho he thong cloud-ats: git.cloudats
+
+### mot so cau lenh su dung dich vu gitlab
+##start,stop,restart
+sudo gitlab-ctl restart/stop/start 
+
+## restart 1 dich vu 
+sudo gitlab-ctl restart sidekiq
+ 
+### view thong tin 
+ sudo gitlab-ctl status
+ 
+ ## view thong tin log 1 service trong gitlab
+ 
+ sudo gitlab-ctl tail postgresql 
+ 
 
 ## install chef-server
 #remember set  ip :domain to file /etc/hosts
@@ -117,3 +133,24 @@ sudo chef-client
 2, chay cau lenh nay tren workstation vi du
 
 knife ssh 192.168.0.4 'sudo chef-client" > /hom/ubuntu/test_run_sh.txt' --manual-list --ssh-user ubuntu --ssh-password '123456'
+
+
+### install jenkins 
+
+wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins
+
+
+
+### change prefix jenkins = edit file /etc/default/jenkins
+sudo vi /etc/default/jenkins
+
+PREFIX = /jenkins
+
+####add them vao JENKINS_ARGS tham so --prefix=$PREFIX example 
+JENKINS_ARGS="--prefix=$PREFIX
+
+
+

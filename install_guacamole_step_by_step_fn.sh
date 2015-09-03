@@ -86,19 +86,27 @@ sudo vim /etc/init/x11vnc.conf
 
 start on login-session-start
 script
-x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /var/run/gdm/ubuntu/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/ubuntu/.vnc/passwd -rfbport 5900 -24to32 -geometry 1024x768
+x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /home/ubuntu/.XAUTHORITY/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/ubuntu/.vnc/passwd -rfbport 5900 -24to32
 end script
 
 ###COMMENT NHAP
 start on login-session-start
 script
-x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /var/run/lightdm/root/:0 -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/tuanhq/.vnc/passwd -rfbport 5900 -24to32 -solid grey -geometry 1920x1080
+x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /var/run/gdm/auth-for-ubuntu-b4bBF8/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/ubuntu/.vnc/passwd -rfbport 5900 -24to32
 end script
 
 x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /var/run/lightdm/root/:0 -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/ubuntu/.vnc/passwd -rfbport 5900 -24to32
+
+x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /home/ubuntu/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/ubuntu/.vnc/passwd -rfbport 5900 -24to32 -solid grey -geometry 1920x1080
 
 
 
 x11vnc -display :0 -auth /var/run/lightdm/root/:0 -forever -shared -rfbauth /home/ubuntu/.vnc/passwd -rfbport 5900 -usepw
 
 1920x1080
+
+
+x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /home/ubuntu/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/ubuntu/.vnc/passwd -rfbport 5900 -24to32
+
+
+x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /home/cloudats/.XAUTHORITY/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/cloudats/.vnc/passwd -rfbport 5900 -24to32 -geometry 1920x1080

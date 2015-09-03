@@ -1,0 +1,4 @@
+### only print colum1
+awk '{print $1}'
+### only print column1 (character phan cach la du : )
+awk -F : '{print $1}'

@@ -7,3 +7,7 @@ git add file /* de add file */
 git commit -m "comment" /* de add commit*/
 git push origin master /*de push git to online */
 
+### git check out tren server voi ban moi nhat
+##vidu
+git reset --hard origin/azue
+
