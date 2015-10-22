@@ -109,4 +109,8 @@ x11vnc -display :0 -auth /var/run/lightdm/root/:0 -forever -shared -rfbauth /hom
 x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /home/ubuntu/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/ubuntu/.vnc/passwd -rfbport 5900 -24to32
 
 
-x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /home/cloudats/.XAUTHORITY/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/cloudats/.vnc/passwd -rfbport 5900 -24to32 -geometry 1920x1080
+
+== UPDATE BY HAINT ==
+To run on OpenStack & AWS
+
+x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /home/cloudats/.XAUTHORITY/database -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /home/cloudats/.vnc/passwd -rfbport 5900 -24to32
